@@ -64,7 +64,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'taobao.pipelines.MongoPipeline': 300,
+    'taobao.pipelines.MongoPipeline': 300,
+    'scrapy_redis.pipelines.RedisPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,5 +90,11 @@ ITEM_PIPELINES = {
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 LOG_LEVEL = 'ERROR'
-MONGO_URI='localhost'
-MONGO_DATABASE='taobao'
+MONGO_URI = 'localhost'
+MONGO_DATABASE = 'taobao'
+
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# REDIS_URL = 'redis://root:pass@hostname:9001'
+REDIS_HOST = '47.95.229.68'
+REDIS_PORT = '6379'
